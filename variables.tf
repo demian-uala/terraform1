@@ -1,41 +1,43 @@
+# Proyecto y región
 variable "project_id" {
-  type = string
+  type        = string
+  description = "ID del proyecto en GCP"
 }
 
 variable "region" {
-  description = "Location for load balancer and Cloud Run resources"
+  description = "Ubicación para recursos del balanceador de carga y Cloud Run"
   default     = "us-central1"
 }
 
-variable "load_balancer" {
-  type = object({
-    name = string
-    ssl = bool
-    domain = string
-  })
-  default = {
-    name = "load-balancer-1"
-    ssl = true
-    domain = "domain-123123.com"
-  }
-  description = {
-    name = "Name for load balancer and associated resources"
-    ssl = "Run load balancer on HTTPS and provision managed certificate with provided `domain`."
-    domain = "Domain name to run the load balancer on. Used if `ssl` is `true`."
-  }
+# Variables del Load Balancer
+variable "load_balancer_name" {
+  description = "Nombre para el balanceador de carga y recursos asociados"
+  type        = string
+  default     = "load_balancer-1"
 }
 
-variable "cloud_run" {
-  type = object({
-    name = string
-    image = string
-  })
-  default = {
-    name = "cloud-run-1"
-    image = "gcr.io/cloudrun/hello"
-  }
-  description = {
-    name = "Name for cloud run instance."
-    image = "Docker Image for cloud run instance."
-  }
+variable "load_balancer_ssl" {
+  description = "Habilitar HTTPS en el balanceador de carga y provisionar un certificado gestionado con el dominio proporcionado"
+  type        = bool
+  default     = false
 }
+
+variable "load_balancer_domain" {
+  description = "Nombre de dominio para ejecutar el balanceador de carga. Se usa si `load_balancer_ssl` está habilitado."
+  type        = string
+  default     = "domain.com"
+}
+
+# Variables de Cloud Run
+variable "cloud_run_name" {
+  description = "Nombre de la instancia de Cloud Run"
+  type        = string
+  default     = "cloud-run-1"
+}
+
+variable "cloud_run_image" {
+  description = "Imagen Docker para la instancia de Cloud Run"
+  type        = string
+  default     = "gcr.io/cloudrun/hello"
+}
+

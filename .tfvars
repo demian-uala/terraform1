@@ -1,6 +1,7 @@
 project_id = "uala-dataplatform-sandbox"
 region = "us-east4"
-lb_name = "terraform1-test"
 cloud_run_name = "cloud-run-test"
-ssl = false
-domain = "domain"
+cloud_run_image= "gcr.io/cloudrun/hello"
+load_balancer_name = "terraform1-test"
+load_balancer_ssl = false
+load_balancer_domain = "domain"
