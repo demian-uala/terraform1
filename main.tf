@@ -29,13 +29,13 @@ module "lb-http" {
   source  = "terraform-google-modules/lb-http/google//modules/serverless_negs"
   version = "~> 12.0"
 
-  name    = var.lb_name
+  name    = var.load_balancer.name
   project = var.project_id
 
-  ssl                             = var.ssl
-  managed_ssl_certificate_domains = [var.domain]
-  https_redirect                  = var.ssl
-  labels                          = { "example-label" = "cloud-run-example" }
+  ssl                             = var.load_balancer.ssl
+  managed_ssl_certificate_domains = [var.load_balancer.domain]
+  https_redirect                  = var.load_balancer.ssl
+  labels                          = { "label" = var.cloud_run.name }
 
   backends = {
     default = {
@@ -68,14 +68,14 @@ resource "google_compute_region_network_endpoint_group" "serverless_neg" {
 }
 
 resource "google_cloud_run_service" "default" {
-  name     = var.cloud_run_name
+  name     = var.cloud_run.name
   location = var.region
   project  = var.project_id
 
   template {
     spec {
       containers {
-        image = var.cloud_run_image
+        image = var.cloud_run.image
       }
     }
   }
