@@ -1,5 +1,5 @@
 output "reserved_ip_address" {
-  value       = module.lb-http.google_compute_global_forwarding_rule.http[0].reserved_ip_address
+  value       = module.lb-http.external_ip
   description = "IP estática reservada y asignada al Load Balancer"
 }
 
