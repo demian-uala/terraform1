@@ -35,7 +35,7 @@ module "lb-http" {
   ssl                             = var.load_balancer_ssl
   managed_ssl_certificate_domains = [var.load_balancer_domain]
   https_redirect                  = var.load_balancer_ssl
-  labels                          = { "label" = var.cloud_run.name }
+  labels                          = { "label" = var.cloud_run_name }
 
   backends = {
     default = {
