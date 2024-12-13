@@ -68,14 +68,14 @@ resource "google_compute_region_network_endpoint_group" "serverless_neg" {
 }
 
 resource "google_cloud_run_service" "default" {
-  name     = "example"
+  name     = var.cloud_run_name
   location = var.region
   project  = var.project_id
 
   template {
     spec {
       containers {
-        image = "gcr.io/cloudrun/hello"
+        image = var.cloud_run_image
       }
     }
   }

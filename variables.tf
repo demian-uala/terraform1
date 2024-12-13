@@ -29,6 +29,15 @@ variable "lb_name" {
   default     = "tf-cr-lb"
 }
 
+variable "cloud_run_name" {
+  description = "Name for cloud run instance."
+}
+
+variable "cloud_run_image" {
+  description = "Docker Image for cloud run instance."
+  default = "gcr.io/cloudrun/hello"
+}
+
 variable "ssl" {
   description = "Run load balancer on HTTPS and provision managed certificate with provided `domain`."
   type        = bool
